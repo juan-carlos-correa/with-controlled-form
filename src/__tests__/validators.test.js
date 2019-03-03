@@ -21,3 +21,35 @@ test('Validators instance and API', () => {
   expect(validators.validate).toBeInstanceOf(Function);
   expect(validators.getResult).toBeInstanceOf(Function);
 });
+
+test('Validators single functions', () => {
+  const isRequiredErrResult = Validators(null).isRequired(true).getResult();
+  expect(isRequiredErrResult).toEqual({ isValid: false, errors: ['Este valor es requerido']});
+
+  const isRequiredValidResult = Validators('some value').isRequired(true).getResult();
+  expect(isRequiredValidResult).toEqual({ isValid: true, errors: []});
+
+  const isEmailErrResult = Validators('wrongmail.com').isEmail().getResult();
+  expect(isEmailErrResult).toEqual({ isValid: false, errors: ['Este valor debe ser un email del tipo name@mail.com']});
+
+  const emailValidResult = Validators('john@mail.com').isEmail().getResult();
+  expect(emailValidResult).toEqual({ isValid: true, errors: [] });
+
+  const numMinErrResult = Validators('some string').isMinLength(12).getResult();
+  expect(numMinErrResult).toEqual({ isValid: false, errors: ['Este valor debe contener al menos 12 caracteres']});
+
+  const numMinValidResult = Validators('this must be correct').isMinLength(20).getResult();
+  expect(numMinValidResult).toEqual({ isValid: true, errors: []});
+
+  const numMaxErrResult = Validators('some string').isMaxLength(10).getResult();
+  expect(numMaxErrResult).toEqual({ isValid: false, errors: ['Este valor debe contener máximo 10 caracteres']});
+
+  const numMaxValidResult = Validators('this must be correct').isMaxLength(20).getResult();
+  expect(numMaxValidResult).toEqual({ isValid: true, errors: []});
+
+  const isEqualErrResult = Validators(100).isEqual('100').getResult();
+  expect(isEqualErrResult).toEqual({ isValid: false, errors:['Los valores son diferentes'] });
+
+  const isEqualValidResult = Validators('100').isEqual('100').getResult();
+  expect(isEqualValidResult).toEqual({ isValid: true, errors:[] });
+});
