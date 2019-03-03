@@ -53,3 +53,18 @@ test('Validators single functions', () => {
   const isEqualValidResult = Validators('100').isEqual('100').getResult();
   expect(isEqualValidResult).toEqual({ isValid: true, errors:[] });
 });
+
+test('Validators chain functions', () => {
+  const errResult = Validators(null).isRequired(true).isMinLength(15).isEqual('other value').getResult();
+  expect(errResult).toEqual({
+    isValid: false,
+    errors: [
+      'Este valor es requerido',
+      'Este valor debe contener al menos 15 caracteres',
+      'Los valores son diferentes'
+    ]
+  });
+
+  const validResult = Validators('some string').isRequired(true).isMinLength(4).isMaxLength(12).isEqual('some string').getResult();
+  expect(validResult).toEqual({ isValid: true, errors: [] });
+});

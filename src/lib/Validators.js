@@ -18,7 +18,7 @@ export const Validators = (value, errors = []) => ({
   },
 
   isMinLength: function (size) {
-    if (value.length < size) {
+    if (!value || (value && value.length < size)) {
       errors.push(`Este valor debe contener al menos ${size} caracteres`);
     }
 
@@ -26,7 +26,7 @@ export const Validators = (value, errors = []) => ({
   },
 
   isMaxLength: function (size) {
-    if (value.length > size) {
+    if (!value || (value && value.length > size)) {
       errors.push(`Este valor debe contener máximo ${size} caracteres`);
     }
 
