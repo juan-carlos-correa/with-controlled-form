@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WithControlledForm 1`] = `
+<form>
+  <div>
+    <label
+      for="email"
+    >
+      Email:
+    </label>
+    <input
+      id="email"
+      name="email"
+      type="text"
+      value=""
+    />
+  </div>
+  <div>
+    <label
+      for="phoneNumber"
+    >
+      Phone number:
+    </label>
+    <input
+      id="phoneNumber"
+      name="phoneNumber"
+      type="tel"
+      value=""
+    />
+  </div>
+  <div
+    class="button"
+  >
+    <button>
+      Send
+    </button>
+  </div>
+</form>
+`;
