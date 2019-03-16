@@ -5,9 +5,10 @@ const Form = ({
   errors,
   handleChange,
   handleBlur,
-  handleFocus
+  handleFocus,
+  handleSubmit
 }) => (
-  <form>
+  <form onSubmit={handleSubmit}>
     <div>
       <label htmlFor="email">Email:</label>
       <input
@@ -34,7 +35,7 @@ const Form = ({
     </div>
 
     <div className="button">
-      <button>Send</button>
+      <button id="send" type="submit">Send</button>
     </div>
   </form>
 );

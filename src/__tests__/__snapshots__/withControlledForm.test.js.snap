@@ -1,39 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WithControlledForm 1`] = `
-<form>
-  <div>
-    <label
-      for="email"
-    >
-      Email:
-    </label>
-    <input
-      id="email"
-      name="email"
-      type="text"
-      value=""
-    />
-  </div>
-  <div>
-    <label
-      for="phoneNumber"
-    >
-      Phone number:
-    </label>
-    <input
-      id="phoneNumber"
-      name="phoneNumber"
-      type="tel"
-      value=""
-    />
-  </div>
-  <div
-    class="button"
+exports[`WithControlledForm render 1`] = `
+<WithFormMethodsHOC>
+  <Form
+    cleanForm={[Function]}
+    errors={
+      Object {
+        "email": "",
+        "phoneNumber": "",
+      }
+    }
+    handleBlur={[Function]}
+    handleChange={[Function]}
+    handleFocus={[Function]}
+    handleSubmit={[Function]}
+    isFormClean={[Function]}
+    values={
+      Object {
+        "email": "",
+        "phoneNumber": "",
+      }
+    }
   >
-    <button>
-      Send
-    </button>
-  </div>
-</form>
+    <form
+      onSubmit={[Function]}
+    >
+      <div>
+        <label
+          htmlFor="email"
+        >
+          Email:
+        </label>
+        <input
+          id="email"
+          name="email"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          type="text"
+          value=""
+        />
+      </div>
+      <div>
+        <label
+          htmlFor="phoneNumber"
+        >
+          Phone number:
+        </label>
+        <input
+          id="phoneNumber"
+          name="phoneNumber"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          type="tel"
+          value=""
+        />
+      </div>
+      <div
+        className="button"
+      >
+        <button
+          id="send"
+          type="submit"
+        >
+          Send
+        </button>
+      </div>
+    </form>
+  </Form>
+</WithFormMethodsHOC>
 `;
