@@ -1,4 +1,4 @@
-import Validators from '../lib/Validators'
+import Validators from '../../lib/Validators'
 
 test('Validators instance and API', () => {
   const validators = Validators();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Form from '../demo/Form';
-import WithControlledForm from '../lib/WithControlledForm';
+import Form from '../components/Form';
+import WithControlledForm from '../../lib/WithControlledForm';
 
 const formState = {
   email: '',

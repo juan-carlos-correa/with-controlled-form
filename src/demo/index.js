@@ -1,5 +1,5 @@
 import React from 'react';
-import FormWithControlled from './FormWithControlled';
+import FormWithControlled from './components/FormWithControlled';
 import './index.css';
 
 export default () => (
