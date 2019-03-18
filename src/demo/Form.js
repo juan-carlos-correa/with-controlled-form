@@ -9,7 +9,7 @@ const Form = ({
   handleSubmit
 }) => (
   <form onSubmit={handleSubmit}>
-    <div>
+    <div className="form-element">
       <label htmlFor="email">Email:</label>
       <input
         className="input"
@@ -21,8 +21,11 @@ const Form = ({
         onBlur={handleBlur}
         onFocus={handleFocus}
       />
+      <div className="error-message">
+        {errors.email}
+      </div>
     </div>
-    <div>
+    <div className="form-element">
       <label htmlFor="phoneNumber">Phone number:</label>
       <input
         className="input"
@@ -34,6 +37,9 @@ const Form = ({
         onBlur={handleBlur}
         onFocus={handleFocus}
       />
+      <div className="error-message">
+        {errors.phoneNumber}
+      </div>
     </div>
 
     <div className="text-center">

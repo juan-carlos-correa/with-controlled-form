@@ -25,7 +25,9 @@ exports[`WithControlledForm render 1`] = `
     <form
       onSubmit={[Function]}
     >
-      <div>
+      <div
+        className="form-element"
+      >
         <label
           htmlFor="email"
         >
@@ -41,8 +43,13 @@ exports[`WithControlledForm render 1`] = `
           type="text"
           value=""
         />
+        <div
+          className="error-message"
+        />
       </div>
-      <div>
+      <div
+        className="form-element"
+      >
         <label
           htmlFor="phoneNumber"
         >
@@ -57,6 +64,9 @@ exports[`WithControlledForm render 1`] = `
           onFocus={[Function]}
           type="tel"
           value=""
+        />
+        <div
+          className="error-message"
         />
       </div>
       <div
