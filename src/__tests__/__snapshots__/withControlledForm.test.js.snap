@@ -32,6 +32,7 @@ exports[`WithControlledForm render 1`] = `
           Email:
         </label>
         <input
+          className="input"
           id="email"
           name="email"
           onBlur={[Function]}
@@ -48,6 +49,7 @@ exports[`WithControlledForm render 1`] = `
           Phone number:
         </label>
         <input
+          className="input"
           id="phoneNumber"
           name="phoneNumber"
           onBlur={[Function]}
@@ -58,9 +60,10 @@ exports[`WithControlledForm render 1`] = `
         />
       </div>
       <div
-        className="button"
+        className="text-center"
       >
         <button
+          className="button"
           id="send"
           type="submit"
         >

@@ -12,6 +12,7 @@ const Form = ({
     <div>
       <label htmlFor="email">Email:</label>
       <input
+        className="input"
         type="text"
         id="email"
         name="email"
@@ -24,6 +25,7 @@ const Form = ({
     <div>
       <label htmlFor="phoneNumber">Phone number:</label>
       <input
+        className="input"
         type="tel"
         id="phoneNumber"
         name="phoneNumber"
@@ -34,8 +36,8 @@ const Form = ({
       />
     </div>
 
-    <div className="button">
-      <button id="send" type="submit">Send</button>
+    <div className="text-center">
+      <button className="button" id="send" type="submit">Send</button>
     </div>
   </form>
 );
