@@ -16,6 +16,27 @@ h2 {
   font-size: 32px
 }
 
+table {
+  width: 100%;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #b0bec5;
+}
+
+th, td {
+  padding: 15px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
 .input {
   border-radius: 4px;
   width: 100%;
