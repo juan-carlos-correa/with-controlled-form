@@ -1,77 +1,97 @@
-export const Validators = (value, errors = []) => ({
-  isRequired: function (verify) {
-    if (verify && !value) {
-      errors.push('Este valor es requerido');
+export default class Validators {
+  constructor (value = '') {
+    this.value = value
+    this.errors = []
+  }
+
+  isRequired (verify) {
+    if (verify && !this.value) {
+      this.errors.push('This value is required');
     }
 
-    return Validators(value, errors);
-  },
+    return this;
+  }
 
-  isEmail: function () {
+  isEmail () {
     const reg = /\S+@\S+\.\S+/;
 
-    if (!reg.test(value)) {
-      errors.push('Este valor debe ser un email del tipo name@mail.com');
+    if (!reg.test(this.value)) {
+      this.errors.push('This value must be a valid email. Example: name@mail.com');
     }
 
-    return Validators(value, errors);
-  },
-
-  isMinLength: function (size) {
-    if (!value || (value && value.length < size)) {
-      errors.push(`Este valor debe contener al menos ${size} caracteres`);
-    }
-
-    return Validators(value, errors);
-  },
-
-  isMaxLength: function (size) {
-    if (!value || (value && value.length > size)) {
-      errors.push(`Este valor debe contener máximo ${size} caracteres`);
-    }
-
-    return Validators(value, errors);
-  },
-
-  isEqual: function (str) {
-    if (value !== str) {
-      errors.push('Los valores son diferentes');
-    }
-
-    return Validators(value, errors);
-  },
-
-  validate: function (globalValues, valueToCheck, rules = {}) {
-    let validator = Validators(valueToCheck);
-
-    const isRequired = rules.isRequired;
-
-    for (let rule in rules) {
-      let valueToValidate = rules[rule];
-
-      if (!isRequired && rule === 'isRequired') {
-        continue;
-      }
-
-      if (!isRequired && !valueToCheck) {
-        continue;
-      }
-
-      if (rule === 'isEqual') {
-        valueToValidate = globalValues[valueToValidate];
-      }
-
-      validator = validator[rule](valueToValidate);
-    }
-
-    return validator.getResult();
-  },
-
-  getResult: function () {
-    const isValid = errors.length === 0;
-
-    return { isValid, errors };
+    return this;
   }
-})
 
-export default Validators;
+  isMinLength (size) {
+    if (!this.value || (this.value && this.value.length < size)) {
+      this.errors.push(`This value must contain at least ${size} characters`);
+    }
+
+    return this;
+  }
+
+  isMaxLength (size) {
+    if (!this.value || (this.value && this.value.length > size)) {
+      this.errors.push(`This value must contain a maximum of ${size} caracteres`);
+    }
+
+    return this;
+  }
+
+  isEqual (str = '') {
+    if (this.value !== str) {
+      this.errors.push('The values are differents');
+    }
+
+    return this;
+  }
+
+  getResult () {
+    const isValid = this.errors.length === 0;
+
+    return { isValid, errors: this.errors };
+  }
+
+  static validate (values, rules = {}) {
+    const result = { isValid: true, errors: {} };
+    let validationOneResult = null;
+
+    for (let value in values) {
+      result.errors[value] = [];
+
+      validationOneResult = Validators.validateOne(values[value], rules[value])
+
+      if (!validationOneResult.isValid) {
+        result.errors[value] = validationOneResult.errors;
+        result.isValid = false;
+      }
+    }
+
+    return result
+  }
+
+  static validateOne (value, rulesValue) {
+    const result = { isValid: true, errors: [] };
+    let validator = null;
+    let error = null;
+    let validationValue = null;
+
+    for (let validationRule in rulesValue) {
+      validator = new Validators(value);
+      validationValue = rulesValue[validationRule];
+      error = validator[validationRule](validationValue).getResult().errors[0];
+
+      if (!error) {
+        continue;
+      }
+
+      if (result.isValid) {
+        result.isValid = false;
+      }
+
+      result.errors.push(error);
+    }
+
+    return result;
+  }
+}

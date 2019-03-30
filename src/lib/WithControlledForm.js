@@ -17,31 +17,16 @@ const WithControlledForm = (FormComponent, state = {}, formValidations = {}) => 
 
       const keys = Object.keys(state);
       for (let i = 0; i < keys.length; i += 1) {
-        errors[keys[i]] = '';
+        errors[keys[i]] = [];
       }
 
       return errors;
     }
 
     _validateForm = (values) => {
-      const { errors } = this.state;
-      let isFormValid = true;
-
-      for (let name in values) {
-        const validations = formValidations[name];
-        const value = values[name];
-        const result = Validators().validate(values, value, validations);
-
-        if (!result.isValid) {
-          isFormValid = false;
-          errors[name] = result.errors[0];
-        } else {
-          errors[name] = '';
-        }
-      }
-
-      this.setState({ errors });
-      return isFormValid;
+      const result = Validators.validate(values, formValidations)
+      this.setState({ errors: result.errors });
+      return result.isValid;
     }
 
     isFormClean = () => {
@@ -80,11 +65,11 @@ const WithControlledForm = (FormComponent, state = {}, formValidations = {}) => 
     handleBlur = (e) => {
       e.preventDefault();
 
-      const { errors, values } = this.state;
+      const { errors } = this.state;
       const { name, value } = e.target;
       const validations = formValidations[name];
-      const result = Validators().validate(values, value, validations);
-      errors[name] = !result.isValid ? result.errors[0] : '';
+      const result = Validators.validateOne(value, validations);
+      errors[name] = !result.isValid ? result.errors[0] : [];
       this.setState({ errors });
     }
 
@@ -96,7 +81,7 @@ const WithControlledForm = (FormComponent, state = {}, formValidations = {}) => 
         this.setState({
           errors: {
             ...this.state.errors,
-            [name]: '',
+            [name]: [],
           }
         })
       }

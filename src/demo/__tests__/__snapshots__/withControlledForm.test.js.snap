@@ -6,8 +6,8 @@ exports[`WithControlledForm render 1`] = `
     cleanForm={[Function]}
     errors={
       Object {
-        "email": "",
-        "phoneNumber": "",
+        "email": Array [],
+        "phoneNumber": Array [],
       }
     }
     handleBlur={[Function]}
