@@ -108,7 +108,7 @@ const Form = ({
 | Name  | Type | Description
 | ------| ---- | -----------|
 values | Object | This object contains the Form state values
-errors | Object | This object contains the error messages for each state value
+errors | Object | This object contains an array of error messages for each state value
 isFormClean | Boolean | This value return if the Form is clean or empty
 handleChange | Function | This function update the state values on change event
 cleanForm | Function | This function clean the form values, witch means reset the state
@@ -127,4 +127,4 @@ Now you can do it too!
 - [ ] Add isNumeric validation
 - [ ] Add custom validation function support
 - [ ] Make live code documentation in guthub pages
-- [ ] Refactor Validators lib
+- [x] Refactor Validators lib
