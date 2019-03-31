@@ -12,6 +12,7 @@ test('Validators instance and API', () => {
   expect(validators).toHaveProperty('isMinLength');
   expect(validators).toHaveProperty('isMaxLength');
   expect(validators).toHaveProperty('isEqual');
+  expect(validators).toHaveProperty('custom');
   expect(validators).toHaveProperty('getResult');
 
   expect(validators.isRequired).toBeInstanceOf(Function);
@@ -183,4 +184,85 @@ test('Validators static function validate result without errors', () => {
   }
 
   expect(result).toEqual(expected)
+});
+
+test('Validators custom function', () => {
+  const customFunction = (name) => {
+    expect(name).toEqual('john');
+
+    const result = /Joana/g.test(name);
+    const message = 'This is the message for this custom function';
+    return { result, message };
+  }
+
+  const result = new Validators('john').custom(customFunction).getResult();
+
+  expect(result).toEqual({
+    isValid: false,
+    errors: ['This is the message for this custom function']
+  });
+});
+
+test('Validators static function validate using custom function with error', () => {
+  const values = {
+    phoneNumber: '1234567890',
+  };
+
+  const validations = {
+    phoneNumber: {
+      isRequired: true,
+      isMinLength: 6,
+      isMaxLength: 15,
+      custom(value) {
+        expect(value).toEqual('1234567890');
+
+        const result = /^55/.test(value);
+        const message = 'The phone number should start with 55';
+
+        return { result, message };
+      }
+    }
+  };
+
+  const result = Validators.validate(values, validations)
+  const expected = {
+    errors: {
+      phoneNumber: ['The phone number should start with 55']
+    },
+    isValid: false
+  };
+
+  expect(result).toEqual(expected);
+});
+
+test('Validators static function validate using custom function without error', () => {
+  const values = {
+    phoneNumber: '5534567890',
+  };
+
+  const validations = {
+    phoneNumber: {
+      isRequired: true,
+      isMinLength: 6,
+      isMaxLength: 15,
+      custom(value) {
+        expect(value).toEqual('5534567890');
+
+        const result = /^55/.test(value);
+        const message = 'The phone number should start with 55';
+
+        return { result, message };
+      }
+    }
+  };
+
+  const result = Validators.validate(values, validations)
+  const expected = {
+    errors: {
+      phoneNumber: []
+    },
+    isValid: true
+  };
+
+  expect(result).toEqual(expected);
 });

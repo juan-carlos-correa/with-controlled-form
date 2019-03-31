@@ -46,6 +46,16 @@ export default class Validators {
     return this;
   }
 
+  custom (cb) {
+    const { result, message } = cb(this.value);
+
+    if (!result) {
+      this.errors.push(message);
+    }
+
+    return this;
+  }
+
   getResult () {
     const isValid = this.errors.length === 0;
 
