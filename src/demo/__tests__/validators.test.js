@@ -213,7 +213,7 @@ test('Validators static function validate using custom function with error', () 
       isRequired: true,
       isMinLength: 6,
       isMaxLength: 15,
-      custom(value) {
+      custom (value) {
         expect(value).toEqual('1234567890');
 
         const result = /^55/.test(value);
@@ -245,7 +245,7 @@ test('Validators static function validate using custom function without error', 
       isRequired: true,
       isMinLength: 6,
       isMaxLength: 15,
-      custom(value) {
+      custom (value) {
         expect(value).toEqual('5534567890');
 
         const result = /^55/.test(value);

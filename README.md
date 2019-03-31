@@ -116,6 +116,41 @@ handleBlur | Function | This function update the error message if exists on blur
 handleFocus | Function | This function remove the error message if exists on focus the respective input
 handleSubmit | Function | This function first run validations and if the inputs are correct, executes the handleSubmit function passed as prop to the Form with controlled
 
+## Validators API
+| Name  | Param | Description
+| ------| ----- | -----------|
+| isRequired | bool | Check if value is truthy |
+| isEmail |  | Check if value match with `/\S+@\S+\.\S+/` |
+| isMinLength | number | Check if value has min length as string |
+| isMaxLength | number |  Check if value has max length as string |
+| isEqual | string |  Check if value is equal with another string |
+| custom | function callback: `({ Boolean: result, String: message})` | Check the result of the callback with result |
+
+### Example of Validators API
+```
+const values = {
+  phoneNumber: '1234567890'
+};
+
+const validations = {
+  phoneNumber: {
+    isRequired: true,
+    isMinLength: 6,
+    isMaxLength: 15,
+    custom (value) {
+      console.log(value) // the value of phoneNumber
+      const result = /^55/.test(value);
+      const message = 'The phone number should start with 55';
+
+      // you must return a object with result boolean value and message string value
+      return { result, message };
+    }
+  }
+};
+
+// pass to WithControlledForm HOC
+```
+
 ## Why With-controlled-form ?
 
 The forms are basic elements in an app. Make a lot of forms in an app ends in repeated logic and code. Using this HOC finally i can make my UI Forms without the trouble of how to manage the state, the logic of the validations and how to operate it.
@@ -124,7 +159,6 @@ Now you can do it too!
 
 ## Todo
 - [ ] Make the validation error message customizable
-- [ ] Add isNumeric validation
-- [ ] Add custom validation function support
+- [x] Add custom validation function support
 - [ ] Make live code documentation in guthub pages
 - [x] Refactor Validators lib
