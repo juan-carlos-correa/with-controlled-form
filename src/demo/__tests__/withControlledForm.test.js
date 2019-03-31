@@ -35,7 +35,7 @@ test('WithControlledForm state tests', () => {
   const FormWithControlled = WithControlledForm(Form, formState, formValidations);
   const wrapper = mount(<FormWithControlled handleSubmit={handleSubmitMock} />);
 
-  let stateToTest = { values: formState, errors: formState };
+  let stateToTest = { values: { email: '', phoneNumber: '' }, errors: { email: [], phoneNumber: [] } };
   let componentState = null;
 
   // initial state
@@ -54,7 +54,7 @@ test('WithControlledForm state tests', () => {
   expect(componentState).toEqual(stateToTest);
 
   wrapper.find('#send').simulate('submit', {})
-  stateToTest = { ...stateToTest, errors: { ...stateToTest.errors, email: 'Este valor debe ser un email del tipo name@mail.com' } };
+  stateToTest = { ...stateToTest, errors: { ...stateToTest.errors, email: ['This value must be a valid email. Example: name@mail.com'] } };
   componentState = wrapper.instance().state;
   expect(componentState).toEqual(stateToTest)
 
@@ -67,8 +67,8 @@ test('WithControlledForm state tests', () => {
       email: 'name@mail.com'
     },
     errors: {
-      phoneNumber: '',
-      email: ''
+      phoneNumber: [],
+      email: []
     }
   };
   wrapper.find('#send').simulate('submit', {})
@@ -79,4 +79,4 @@ test('WithControlledForm state tests', () => {
   expect(handleSubmitMock.mock.calls.length).toBe(1);
 
   wrapper.unmount();
-})
+});
