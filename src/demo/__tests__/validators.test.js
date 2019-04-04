@@ -30,10 +30,10 @@ test('Validators single functions', () => {
   const isRequiredValidResult = new Validators('some value').isRequired(true).getResult();
   expect(isRequiredValidResult).toEqual({ isValid: true, errors: []});
 
-  const isEmailErrResult = new Validators('wrongmail.com').isEmail().getResult();
+  const isEmailErrResult = new Validators('wrongmail.com').isEmail(true).getResult();
   expect(isEmailErrResult).toEqual({ isValid: false, errors: ['This value must be a valid email. Example: name@mail.com']});
 
-  const emailValidResult = new Validators('john@mail.com').isEmail().getResult();
+  const emailValidResult = new Validators('john@mail.com').isEmail(true).getResult();
   expect(emailValidResult).toEqual({ isValid: true, errors: [] });
 
   const numMinErrResult = new Validators('some string').isMinLength(12).getResult();
@@ -266,3 +266,41 @@ test('Validators static function validate using custom function without error', 
 
   expect(result).toEqual(expected);
 });
+
+test('Validators static function validate with custom message', () => {
+  const values = {
+    phoneNumber: '',
+    email: '',
+  };
+
+  const validations = {
+    phoneNumber: {
+      isRequired: [true, 'The phone number is required'],
+      isMaxLength: [6, 'The phone number must contain 6 length'],
+      isMinLength: [15, 'The phone number must at least 6 length'],
+    },
+    email: {
+      isEmail: [true, 'The email must be a valid value'],
+      isEqual: ['john.doe@mail.com', 'The email for some reason must be equal to john.doe@mail.com'],
+    }
+  };
+
+  const result = Validators.validate(values, validations)
+
+  const expected = {
+    errors: {
+      phoneNumber: [
+        'The phone number is required',
+        'The phone number must contain 6 length',
+        'The phone number must at least 6 length',
+      ],
+      email: [
+        'The email must be a valid value',
+        'The email for some reason must be equal to john.doe@mail.com',
+      ],
+    },
+    isValid: false
+  };
+
+  expect(result).toEqual(expected);
+})

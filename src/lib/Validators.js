@@ -4,43 +4,53 @@ export default class Validators {
     this.errors = []
   }
 
-  isRequired (verify) {
+  isRequired (verify, message) {
+    message = message || 'This value is required'
+
     if (verify && !this.value) {
-      this.errors.push('This value is required');
+      this.errors.push(message);
     }
 
     return this;
   }
 
-  isEmail () {
+  isEmail (verify, message) {
+    message = message || 'This value must be a valid email. Example: name@mail.com'
+
     const reg = /\S+@\S+\.\S+/;
 
-    if (!reg.test(this.value)) {
-      this.errors.push('This value must be a valid email. Example: name@mail.com');
+    if (verify && !reg.test(this.value)) {
+      this.errors.push(message);
     }
 
     return this;
   }
 
-  isMinLength (size) {
+  isMinLength (size, message) {
+    message = message || `This value must contain at least ${size} characters`
+
     if (!this.value || (this.value && this.value.length < size)) {
-      this.errors.push(`This value must contain at least ${size} characters`);
+      this.errors.push(message);
     }
 
     return this;
   }
 
-  isMaxLength (size) {
+  isMaxLength (size, message) {
+    message = message || `This value must contain a maximum of ${size} caracteres`
+
     if (!this.value || (this.value && this.value.length > size)) {
-      this.errors.push(`This value must contain a maximum of ${size} caracteres`);
+      this.errors.push(message);
     }
 
     return this;
   }
 
-  isEqual (str = '') {
+  isEqual (str = '', message) {
+    message = message || 'The values are differents'
+
     if (this.value !== str) {
-      this.errors.push('The values are differents');
+      this.errors.push(message);
     }
 
     return this;
@@ -89,7 +99,14 @@ export default class Validators {
     for (let validationRule in rulesValue) {
       validator = new Validators(value);
       validationValue = rulesValue[validationRule];
-      error = validator[validationRule](validationValue).getResult().errors[0];
+
+      if (Array.isArray(validationValue)) {
+        const value = validationValue[0]
+        const message = validationValue[1]
+        error = validator[validationRule](value, message).getResult().errors[0];
+      } else {
+        error = validator[validationRule](validationValue).getResult().errors[0];
+      }
 
       if (!error) {
         continue;
