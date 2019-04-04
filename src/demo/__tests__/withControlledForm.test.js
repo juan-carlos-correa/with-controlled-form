@@ -13,7 +13,7 @@ const formValidations = {
     isRequired: true,
     isMinLength: 3,
     isMaxLength: 60,
-    isEmail: true,
+    isEmail: [true, 'email is not valid!'],
   },
   phoneNumber: {
     isRequired: true,
@@ -54,7 +54,7 @@ test('WithControlledForm state tests', () => {
   expect(componentState).toEqual(stateToTest);
 
   wrapper.find('#send').simulate('submit', {})
-  stateToTest = { ...stateToTest, errors: { ...stateToTest.errors, email: ['This value must be a valid email. Example: name@mail.com'] } };
+  stateToTest = { ...stateToTest, errors: { ...stateToTest.errors, email: ['email is not valid!'] } };
   componentState = wrapper.instance().state;
   expect(componentState).toEqual(stateToTest)
 
