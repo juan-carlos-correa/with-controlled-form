@@ -27,7 +27,8 @@ const formValidations = {
     isRequired: true,
     isMinLength: 3,
     isMaxLength: 60,
-    isEmail: true,
+    // You can add custom messages!
+    isEmail: [true, 'The emails must be valid value!'],
   },
   phoneNumber: {
     isRequired: true,
@@ -117,14 +118,14 @@ handleFocus | Function | This function remove the error message if exists on foc
 handleSubmit | Function | This function first run validations and if the inputs are correct, executes the handleSubmit function passed as prop to the Form with controlled
 
 ## Validators API
-| Name  | Param | Description
+| Name  | Params | Description |
 | ------| ----- | -----------|
-| isRequired | bool | Check if value is truthy |
-| isEmail |  | Check if value match with `/\S+@\S+\.\S+/` |
-| isMinLength | number | Check if value has min length as string |
-| isMaxLength | number |  Check if value has max length as string |
-| isEqual | string |  Check if value is equal with another string |
-| custom | function callback: `({ Boolean: result, String: message})` | Check the result of the callback with result |
+| isRequired | Boolean: verify, [optional] String: message | Check if value is truthy |
+| isEmail | Bolean: verify, [optional] String: message | Check if value match with `/\S+@\S+\.\S+/` |
+| isMinLength | Int: size, [optional] String: message | Check if value has min length as string |
+| isMaxLength | Int: size, [optional] String: message |  Check if value has max length as string |
+| isEqual | String: value, [optional] String: message |  Check if value is equal with another string |
+| custom | Function: callback | Check the result of the callback with result |
 
 ### Example of Validators API
 ```
@@ -145,6 +146,11 @@ const validations = {
       // you must return a object with result boolean value and message string value
       return { result, message };
     }
+  },
+  email: {
+      // Using custom messages!
+      isRequired: [true, 'The email is required!'],
+      isMinLength: [6, 'The email must contain at least 6 chatacters']
   }
 };
 
@@ -158,7 +164,7 @@ The forms are basic elements in an app. Make a lot of forms in an app ends in re
 Now you can do it too!
 
 ## Todo
-- [ ] Make the validation error message customizable
+- [x] Make the validation error message customizable
 - [x] Add custom validation function support
 - [ ] Make live code documentation in guthub pages
 - [x] Refactor Validators lib
