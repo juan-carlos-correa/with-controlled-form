@@ -43,7 +43,7 @@ test('Validators single functions', () => {
   expect(numMinValidResult).toEqual({ isValid: true, errors: []});
 
   const numMaxErrResult = new Validators('some string').isMaxLength(10).getResult();
-  expect(numMaxErrResult).toEqual({ isValid: false, errors: ['This value must contain a maximum of 10 caracteres']});
+  expect(numMaxErrResult).toEqual({ isValid: false, errors: ['This value must contain a maximum of 10 characters']});
 
   const numMaxValidResult = new Validators('this must be correct').isMaxLength(20).getResult();
   expect(numMaxValidResult).toEqual({ isValid: true, errors: []});
@@ -86,7 +86,7 @@ test('Validators static function validateOne result with errors', () => {
     errors: [
       'This value is required',
       'This value must contain at least 3 characters',
-      'This value must contain a maximum of 60 caracteres',
+      'This value must contain a maximum of 60 characters',
       'This value must be a valid email. Example: name@mail.com',
     ],
   }
@@ -139,13 +139,13 @@ test('Validators static function validate result with errors', () => {
       email: [
         'This value is required',
         'This value must contain at least 3 characters',
-        'This value must contain a maximum of 60 caracteres',
+        'This value must contain a maximum of 60 characters',
         'This value must be a valid email. Example: name@mail.com'
       ],
       phoneNumber: [
         'This value is required',
         'This value must contain at least 6 characters',
-        'This value must contain a maximum of 15 caracteres'
+        'This value must contain a maximum of 15 characters'
       ]
     },
     isValid: false

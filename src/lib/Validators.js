@@ -37,7 +37,7 @@ export default class Validators {
   }
 
   isMaxLength (size, message) {
-    message = message || `This value must contain a maximum of ${size} caracteres`
+    message = message || `This value must contain a maximum of ${size} characters`
 
     if (!this.value || (this.value && this.value.length > size)) {
       this.errors.push(message);
