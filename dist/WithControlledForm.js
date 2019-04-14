@@ -32,34 +32,20 @@ var WithControlledForm = function WithControlledForm(FormComponent) {
         var keys = Object.keys(state);
 
         for (var i = 0; i < keys.length; i += 1) {
-          errors[keys[i]] = '';
+          errors[keys[i]] = [];
         }
 
         return errors;
       });
 
       _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_validateForm", function (values) {
-        var errors = _this.state.errors;
-        var isFormValid = true;
-
-        for (var name in values) {
-          var validations = formValidations[name];
-          var value = values[name];
-          var result = Validators().validate(values, value, validations);
-
-          if (!result.isValid) {
-            isFormValid = false;
-            errors[name] = result.errors[0];
-          } else {
-            errors[name] = '';
-          }
-        }
+        var result = Validators.validate(values, formValidations);
 
         _this.setState({
-          errors: errors
+          errors: result.errors
         });
 
-        return isFormValid;
+        return result.isValid;
       });
 
       _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "isFormClean", function () {
@@ -106,15 +92,13 @@ var WithControlledForm = function WithControlledForm(FormComponent) {
 
       _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleBlur", function (e) {
         e.preventDefault();
-        var _this$state = _this.state,
-            errors = _this$state.errors,
-            values = _this$state.values;
+        var errors = _this.state.errors;
         var _e$target2 = e.target,
             name = _e$target2.name,
             value = _e$target2.value;
         var validations = formValidations[name];
-        var result = Validators().validate(values, value, validations);
-        errors[name] = !result.isValid ? result.errors[0] : '';
+        var result = Validators.validateOne(value, validations);
+        errors[name] = !result.isValid ? result.errors[0] : [];
 
         _this.setState({
           errors: errors
@@ -127,7 +111,7 @@ var WithControlledForm = function WithControlledForm(FormComponent) {
 
         if (!!errors[name].length) {
           _this.setState({
-            errors: _objectSpread({}, _this.state.errors, _defineProperty({}, name, ''))
+            errors: _objectSpread({}, _this.state.errors, _defineProperty({}, name, []))
           });
         }
       });
