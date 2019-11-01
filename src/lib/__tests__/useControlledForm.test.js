@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Form from '../../demo/components/Form';
 import { useControlledForm } from '../';
 
@@ -23,12 +23,12 @@ const formValidations = {
 };
 
 const FormWithUseControlledFormHook = () => {
-  const [
+  const {
     values,
     errors,
     handleChange,
     handleSubmit
-  ] = useControlledForm(formState, formValidations);
+   } = useControlledForm(formState, formValidations);
 
   return <Form
     values={values}
@@ -41,6 +41,4 @@ const FormWithUseControlledFormHook = () => {
 test('useControlledForm hook render without crash', () => {
   const wrapper = mount(<FormWithUseControlledFormHook />);
   expect(wrapper).toMatchSnapshot();
-
-  wrapper.unmount();
 });

@@ -35,5 +35,5 @@ export const useControlledForm = (initialState, formValidations) => {
     return result.isValid;
   }
 
-  return [values, errors, handleChange, handleSubmit ];
+  return {values, errors, handleChange, handleSubmit };
 }
