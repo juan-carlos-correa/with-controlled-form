@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Validators from './Validators';
 
-const WithControlledForm = (FormComponent, state = {}, formValidations = {}) => (
+export const WithControlledForm = (FormComponent, state = {}, formValidations = {}) => (
   class WithFormMethodsHOC extends Component {
     constructor (props) {
       super(props);
@@ -113,5 +113,3 @@ const WithControlledForm = (FormComponent, state = {}, formValidations = {}) => 
     }
   }
 );
-
-export default WithControlledForm;
