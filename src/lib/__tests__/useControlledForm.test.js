@@ -22,7 +22,7 @@ const formValidations = {
   }
 };
 
-const FormWithUseControlledFormHook = () => {
+const FormWithUseControlledFormHook = ({ myHandleSubmit }) => {
   const {
     values,
     errors,
@@ -34,7 +34,7 @@ const FormWithUseControlledFormHook = () => {
     values={values}
     errors={errors}
     handleChange={handleChange}
-    handleSubmit={handleSubmit}
+    handleSubmit={() => handleSubmit(myHandleSubmit)}
   />
 }
 
@@ -42,3 +42,23 @@ test('useControlledForm hook render without crash', () => {
   const wrapper = mount(<FormWithUseControlledFormHook />);
   expect(wrapper).toMatchSnapshot();
 });
+
+test('useControlledForm call submit handler function properly with valid values', () => {
+  const handleSubmitMock = jest.fn();
+  const wrapper = mount(<FormWithUseControlledFormHook myHandleSubmit={handleSubmitMock} />);
+
+  const email = wrapper.find('#email');
+  expect(email).toHaveLength(1);
+
+  email.simulate('change', { target: { value: 'foo@mail.com', name: 'email' } });
+
+  const phoneNumber = wrapper.find('#phoneNumber');
+  expect(phoneNumber).toHaveLength(1);
+
+  phoneNumber.simulate('change', { target: { value: '5512345678', name: 'phoneNumber' } });
+
+  const form = wrapper.find('form');
+  form.simulate('submit');
+
+  expect(handleSubmitMock).toHaveBeenCalledTimes(1);
+})
