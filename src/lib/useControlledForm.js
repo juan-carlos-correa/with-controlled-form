@@ -31,7 +31,7 @@ export const useControlledForm = (initialState, formValidations) => {
 
   const _validateForm = (valuesToValidate) => {
     const result = Validators.validate(valuesToValidate, formValidations);
-    setErrors({ errors: result.errors });
+    setErrors({ ...result.errors });
     return result.isValid;
   }
 

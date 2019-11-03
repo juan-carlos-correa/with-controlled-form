@@ -21,8 +21,8 @@ const Form = ({
         onBlur={handleBlur}
         onFocus={handleFocus}
       />
-      <div className="error-message">
-        {errors.email}
+      <div id="email-error-message" className="error-message">
+        {errors.email[0]}
       </div>
     </div>
     <div className="form-element">
@@ -37,8 +37,8 @@ const Form = ({
         onBlur={handleBlur}
         onFocus={handleFocus}
       />
-      <div className="error-message">
-        {errors.phoneNumber}
+      <div id="phoneNumber-error-message" className="error-message">
+        {errors.phoneNumber[0]}
       </div>
     </div>
 

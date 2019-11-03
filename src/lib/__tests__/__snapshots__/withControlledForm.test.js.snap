@@ -45,6 +45,7 @@ exports[`WithControlledForm render 1`] = `
         />
         <div
           className="error-message"
+          id="email-error-message"
         />
       </div>
       <div
@@ -67,6 +68,7 @@ exports[`WithControlledForm render 1`] = `
         />
         <div
           className="error-message"
+          id="phoneNumber-error-message"
         />
       </div>
       <div

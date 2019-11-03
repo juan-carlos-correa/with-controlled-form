@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`useControlledForm hook render without crash 1`] = `
+exports[`useControlledForm hook valid render and correct submit render without crash 1`] = `
 <FormWithUseControlledFormHook
   myHandleSubmit={[MockFunction]}
 >
@@ -41,6 +41,7 @@ exports[`useControlledForm hook render without crash 1`] = `
         />
         <div
           className="error-message"
+          id="email-error-message"
         />
       </div>
       <div
@@ -61,164 +62,7 @@ exports[`useControlledForm hook render without crash 1`] = `
         />
         <div
           className="error-message"
-        />
-      </div>
-      <div
-        className="text-center"
-      >
-        <button
-          className="button"
-          id="send"
-          type="submit"
-        >
-          Send
-        </button>
-      </div>
-    </form>
-  </Form>
-</FormWithUseControlledFormHook>
-`;
-
-exports[`useControlledForm hook useControlledForm hook render without crash 1`] = `
-<FormWithUseControlledFormHook
-  myHandleSubmit={[MockFunction]}
->
-  <Form
-    errors={
-      Object {
-        "email": Array [],
-        "phoneNumber": Array [],
-      }
-    }
-    handleChange={[Function]}
-    handleSubmit={[Function]}
-    values={
-      Object {
-        "email": "",
-        "phoneNumber": "",
-      }
-    }
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <div
-        className="form-element"
-      >
-        <label
-          htmlFor="email"
-        >
-          Email:
-        </label>
-        <input
-          className="input"
-          id="email"
-          name="email"
-          onChange={[Function]}
-          type="text"
-          value=""
-        />
-        <div
-          className="error-message"
-        />
-      </div>
-      <div
-        className="form-element"
-      >
-        <label
-          htmlFor="phoneNumber"
-        >
-          Phone number:
-        </label>
-        <input
-          className="input"
-          id="phoneNumber"
-          name="phoneNumber"
-          onChange={[Function]}
-          type="tel"
-          value=""
-        />
-        <div
-          className="error-message"
-        />
-      </div>
-      <div
-        className="text-center"
-      >
-        <button
-          className="button"
-          id="send"
-          type="submit"
-        >
-          Send
-        </button>
-      </div>
-    </form>
-  </Form>
-</FormWithUseControlledFormHook>
-`;
-
-exports[`useControlledForm tests useControlledForm hook render without crash 1`] = `
-<FormWithUseControlledFormHook
-  myHandleSubmit={[MockFunction]}
->
-  <Form
-    errors={
-      Object {
-        "email": Array [],
-        "phoneNumber": Array [],
-      }
-    }
-    handleChange={[Function]}
-    handleSubmit={[Function]}
-    values={
-      Object {
-        "email": "",
-        "phoneNumber": "",
-      }
-    }
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <div
-        className="form-element"
-      >
-        <label
-          htmlFor="email"
-        >
-          Email:
-        </label>
-        <input
-          className="input"
-          id="email"
-          name="email"
-          onChange={[Function]}
-          type="text"
-          value=""
-        />
-        <div
-          className="error-message"
-        />
-      </div>
-      <div
-        className="form-element"
-      >
-        <label
-          htmlFor="phoneNumber"
-        >
-          Phone number:
-        </label>
-        <input
-          className="input"
-          id="phoneNumber"
-          name="phoneNumber"
-          onChange={[Function]}
-          type="tel"
-          value=""
-        />
-        <div
-          className="error-message"
+          id="phoneNumber-error-message"
         />
       </div>
       <div
