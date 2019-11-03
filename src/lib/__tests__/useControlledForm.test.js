@@ -38,27 +38,38 @@ const FormWithUseControlledFormHook = ({ myHandleSubmit }) => {
   />
 }
 
-test('useControlledForm hook render without crash', () => {
-  const wrapper = mount(<FormWithUseControlledFormHook />);
-  expect(wrapper).toMatchSnapshot();
-});
+describe('useControlledForm hook', () => {
+  let wrapper = null;
+  let handleSubmitMock = null;
 
-test('useControlledForm call submit handler function properly with valid values', () => {
-  const handleSubmitMock = jest.fn();
-  const wrapper = mount(<FormWithUseControlledFormHook myHandleSubmit={handleSubmitMock} />);
+  beforeEach(() => {
+    handleSubmitMock = jest.fn();
+    wrapper = mount(<FormWithUseControlledFormHook myHandleSubmit={handleSubmitMock} />);
+  });
 
-  const email = wrapper.find('#email');
-  expect(email).toHaveLength(1);
+  afterEach(() => {
+    handleSubmitMock.mockClear();
+    wrapper.unmount();
+  });
 
-  email.simulate('change', { target: { value: 'foo@mail.com', name: 'email' } });
+  test('render without crash', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-  const phoneNumber = wrapper.find('#phoneNumber');
-  expect(phoneNumber).toHaveLength(1);
+  test('call submit handler function properly with valid values', () => {
+    const email = wrapper.find('#email');
+    expect(email).toHaveLength(1);
 
-  phoneNumber.simulate('change', { target: { value: '5512345678', name: 'phoneNumber' } });
+    email.simulate('change', { target: { value: 'foo@mail.com', name: 'email' } });
 
-  const form = wrapper.find('form');
-  form.simulate('submit');
+    const phoneNumber = wrapper.find('#phoneNumber');
+    expect(phoneNumber).toHaveLength(1);
 
-  expect(handleSubmitMock).toHaveBeenCalledTimes(1);
+    phoneNumber.simulate('change', { target: { value: '5512345678', name: 'phoneNumber' } });
+
+    const form = wrapper.find('form');
+    form.simulate('submit');
+
+    expect(handleSubmitMock).toHaveBeenCalledTimes(1);
+  });
 })
