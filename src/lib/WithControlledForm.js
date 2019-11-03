@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Validators from './Validators';
+import { Validators } from './Validators';
 
 export const WithControlledForm = (FormComponent, state = {}, formValidations = {}) => (
   class WithFormMethodsHOC extends Component {

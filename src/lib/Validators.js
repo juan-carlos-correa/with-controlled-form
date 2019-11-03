@@ -1,4 +1,4 @@
-export default class Validators {
+export class Validators {
   constructor (value = '') {
     this.value = value
     this.errors = []

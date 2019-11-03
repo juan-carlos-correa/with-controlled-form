@@ -1,6 +1,6 @@
 'use strict'
 
-import Validators from '../Validators'
+import { Validators } from '../Validators'
 
 test('Validators instance and API', () => {
   const validators = new Validators();
