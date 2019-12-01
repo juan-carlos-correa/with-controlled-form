@@ -108,17 +108,6 @@ export var WithControlledForm = function WithControlledForm(FormComponent) {
         });
       });
 
-      _defineProperty(_assertThisInitialized(_this), "handleFocus", function (e) {
-        var name = e.target.name;
-        var errors = _this.state.errors;
-
-        if (!!errors[name].length) {
-          _this.setState({
-            errors: _objectSpread({}, _this.state.errors, _defineProperty({}, name, []))
-          });
-        }
-      });
-
       _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (e) {
         e.preventDefault();
         var values = _this.state.values;
@@ -145,7 +134,6 @@ export var WithControlledForm = function WithControlledForm(FormComponent) {
           handleChange: this.handleChange,
           handleCheckboxChange: this.handleCheckboxChange,
           handleBlur: this.handleBlur,
-          handleFocus: this.handleFocus,
           handleSubmit: this.handleSubmit
         }));
       }

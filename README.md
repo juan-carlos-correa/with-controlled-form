@@ -65,7 +65,6 @@ const Form = ({
   errors,
   handleChange,
   handleBlur,
-  handleFocus,
   handleSubmit
 }) => (
   <form onSubmit={handleSubmit}>
@@ -79,7 +78,6 @@ const Form = ({
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
-        onFocus={handleFocus}
       />
       <div className="error-message">
         {errors.email}
@@ -95,7 +93,6 @@ const Form = ({
         value={values.phoneNumber}
         onChange={handleChange}
         onBlur={handleBlur}
-        onFocus={handleFocus}
       />
       <div className="error-message">
         {errors.phoneNumber}
@@ -171,7 +168,6 @@ const Form = ({
   errors,
   handleChange,
   handleBlur,
-  handleFocus,
   handleSubmit
 }) => (
   <form onSubmit={handleSubmit}>
@@ -185,7 +181,6 @@ const Form = ({
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
-        onFocus={handleFocus}
       />
       <div className="error-message">
         {errors.email}
@@ -201,7 +196,6 @@ const Form = ({
         value={values.phoneNumber}
         onChange={handleChange}
         onBlur={handleBlur}
-        onFocus={handleFocus}
       />
       <div className="error-message">
         {errors.phoneNumber}
@@ -248,7 +242,6 @@ const Form = ({
 | handleChange | Function | This function update the state values on change event
 | cleanForm | Function | This function clean the form values, witch means reset the state
 | handleBlur | Function | This function update the error message if exists on blur the respective input
-| handleFocus | Function | This function remove the error message if exists on focus the respective input
 
 ### Example of Validators API
 ```

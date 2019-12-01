@@ -1,18 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`useControlledForm hook valid render and correct submit render without crash 1`] = `
-<FormWithUseControlledFormHook
-  myHandleSubmit={[MockFunction]}
+exports[`WithControlledForm HOC WithControlledForm render 1`] = `
+<WithFormMethodsHOC
+  handleSubmit={[MockFunction]}
 >
   <Form
+    cleanForm={[Function]}
     errors={
       Object {
         "email": Array [],
         "phoneNumber": Array [],
       }
     }
+    handleBlur={[Function]}
     handleChange={[Function]}
+    handleCheckboxChange={[Function]}
     handleSubmit={[Function]}
+    isFormClean={[Function]}
     values={
       Object {
         "email": "",
@@ -33,14 +37,17 @@ exports[`useControlledForm hook valid render and correct submit render without c
         </label>
         <input
           className="input"
+          data-test="email"
           id="email"
           name="email"
+          onBlur={[Function]}
           onChange={[Function]}
           type="text"
           value=""
         />
         <div
           className="error-message"
+          data-test="emailError"
           id="email-error-message"
         />
       </div>
@@ -54,14 +61,17 @@ exports[`useControlledForm hook valid render and correct submit render without c
         </label>
         <input
           className="input"
+          data-test="phoneNumber"
           id="phoneNumber"
           name="phoneNumber"
+          onBlur={[Function]}
           onChange={[Function]}
           type="tel"
           value=""
         />
         <div
           className="error-message"
+          data-test="phoneNumberError"
           id="phoneNumber-error-message"
         />
       </div>
@@ -78,5 +88,5 @@ exports[`useControlledForm hook valid render and correct submit render without c
       </div>
     </form>
   </Form>
-</FormWithUseControlledFormHook>
+</WithFormMethodsHOC>
 `;

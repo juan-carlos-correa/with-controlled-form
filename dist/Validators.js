@@ -14,8 +14,8 @@ function () {
 
   _createClass(Validators, [{
     key: "isRequired",
-    value: function isRequired(verify, message) {
-      message = message || 'This value is required';
+    value: function isRequired(verify) {
+      var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'This value is required';
 
       if (verify && !this.value) {
         this.errors.push(message);
@@ -25,8 +25,8 @@ function () {
     }
   }, {
     key: "isEmail",
-    value: function isEmail(verify, message) {
-      message = message || 'This value must be a valid email. Example: name@mail.com';
+    value: function isEmail(verify) {
+      var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'This value must be a valid email. Example: name@mail.com';
       var reg = /\S+@\S+\.\S+/;
 
       if (verify && !reg.test(this.value)) {
@@ -61,8 +61,7 @@ function () {
     key: "isEqual",
     value: function isEqual() {
       var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-      var message = arguments.length > 1 ? arguments[1] : undefined;
-      message = message || 'The values are differents';
+      var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'The values are differents';
 
       if (this.value !== str) {
         this.errors.push(message);

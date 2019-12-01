@@ -4,9 +4,7 @@ export class Validators {
     this.errors = []
   }
 
-  isRequired (verify, message) {
-    message = message || 'This value is required'
-
+  isRequired (verify, message='This value is required') {
     if (verify && !this.value) {
       this.errors.push(message);
     }
@@ -14,9 +12,7 @@ export class Validators {
     return this;
   }
 
-  isEmail (verify, message) {
-    message = message || 'This value must be a valid email. Example: name@mail.com'
-
+  isEmail (verify, message='This value must be a valid email. Example: name@mail.com') {
     const reg = /\S+@\S+\.\S+/;
 
     if (verify && !reg.test(this.value)) {
@@ -46,9 +42,7 @@ export class Validators {
     return this;
   }
 
-  isEqual (str = '', message) {
-    message = message || 'The values are differents'
-
+  isEqual (str = '', message='The values are differents') {
     if (this.value !== str) {
       this.errors.push(message);
     }

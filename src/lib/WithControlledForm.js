@@ -76,20 +76,6 @@ export const WithControlledForm = (FormComponent, state = {}, formValidations = 
       this.setState({ errors });
     }
 
-    handleFocus = (e) => {
-      const { name } = e.target;
-      const { errors } = this.state;
-
-      if (!!errors[name].length) {
-        this.setState({
-          errors: {
-            ...this.state.errors,
-            [name]: [],
-          }
-        })
-      }
-    }
-
     handleSubmit = (e) => {
       e.preventDefault();
       const { values } = this.state;
@@ -110,7 +96,6 @@ export const WithControlledForm = (FormComponent, state = {}, formValidations = 
           handleChange={this.handleChange}
           handleCheckboxChange={this.handleCheckboxChange}
           handleBlur={this.handleBlur}
-          handleFocus={this.handleFocus}
           handleSubmit={this.handleSubmit}
         />
       )

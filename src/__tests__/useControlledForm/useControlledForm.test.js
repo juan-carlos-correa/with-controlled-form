@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Form from '../demo/components/Form';
-import { useControlledForm } from '../lib';
+import Form from '../../demo/components/Form';
+import { useControlledForm } from '../../lib';
 
 const formState = {
   email: '',
@@ -27,32 +27,48 @@ const FormWithUseControlledFormHook = ({ myHandleSubmit }) => {
     values,
     errors,
     handleChange,
-    handleSubmit
+    handleSubmit,
+    handleBlur,
+    cleanForm
    } = useControlledForm(formState, formValidations);
 
-  return <Form
-    values={values}
-    errors={errors}
-    handleChange={handleChange}
-    handleSubmit={() => handleSubmit(myHandleSubmit)}
-  />
+  return (
+    <>
+      <Form
+        values={values}
+        errors={errors}
+        handleChange={handleChange}
+        handleSubmit={() => handleSubmit(myHandleSubmit)}
+        handleBlur={handleBlur}
+      />
+      <button data-test="clear-form" onClick={() => cleanForm()}>Clear form</button>
+    </>
+  );
 }
 
 describe('useControlledForm hook', () => {
+  let handleSubmitMock = null;
+  let wrapper = null;
+
+  beforeAll(() => {
+    handleSubmitMock = jest.fn();
+  });
+
+  beforeEach(() => {
+    wrapper = mount(<FormWithUseControlledFormHook myHandleSubmit={handleSubmitMock} />);
+  });
+
+  afterEach(() => {
+    handleSubmitMock.mockClear();
+    wrapper.unmount();
+  });
+
   describe('valid render and correct submit', () => {
     test('render without crash', () => {
-      const handleSubmitMock = jest.fn();
-      const wrapper = mount(<FormWithUseControlledFormHook myHandleSubmit={handleSubmitMock} />);
-
       expect(wrapper).toMatchSnapshot();
-
-      wrapper.unmount();
     });
 
     test('call submit handler function properly with valid values', () => {
-      const handleSubmitMock = jest.fn();
-      const wrapper = mount(<FormWithUseControlledFormHook myHandleSubmit={handleSubmitMock} />);
-
       const email = wrapper.find('#email');
       expect(email).toHaveLength(1);
 
@@ -67,16 +83,11 @@ describe('useControlledForm hook', () => {
       form.simulate('submit');
 
       expect(handleSubmitMock).toHaveBeenCalledTimes(1);
-
-      wrapper.unmount();
     });
   })
 
   describe('input validations on submit', () => {
     test('required fields', () => {
-      const handleSubmitMock = jest.fn();
-      const wrapper = mount(<FormWithUseControlledFormHook myHandleSubmit={handleSubmitMock} />);
-
       const form = wrapper.find('form');
       form.simulate('submit');
 
@@ -87,14 +98,9 @@ describe('useControlledForm hook', () => {
       expect(phoneNumberErrorMessage.text()).toContain('This value is required');
 
       expect(handleSubmitMock).toHaveBeenCalledTimes(0);
-
-      wrapper.unmount();
     });
 
     test('isMinLength', () => {
-      const handleSubmitMock = jest.fn();
-      const wrapper = mount(<FormWithUseControlledFormHook myHandleSubmit={handleSubmitMock} />);
-
       const email = wrapper.find('#email');
       email.simulate('change', { target: { value: 'fo', name: 'email' } });
 
@@ -111,14 +117,9 @@ describe('useControlledForm hook', () => {
       expect(phoneNumberErrorMessage.text()).toContain('This value must contain at least 6 characters');
 
       expect(handleSubmitMock).toHaveBeenCalledTimes(0);
-
-      wrapper.unmount();
     });
 
     test('isMaxLength', () => {
-      const handleSubmitMock = jest.fn();
-      const wrapper = mount(<FormWithUseControlledFormHook myHandleSubmit={handleSubmitMock} />);
-
       const email = wrapper.find('#email');
       email.simulate('change', { target: { value: 'foooooooooooooooooooooooo@mail.com', name: 'email' } });
 
@@ -135,14 +136,9 @@ describe('useControlledForm hook', () => {
       expect(phoneNumberErrorMessage.text()).toContain('This value must contain a maximum of 15 characters');
 
       expect(handleSubmitMock).toHaveBeenCalledTimes(0);
-
-      wrapper.unmount();
     });
 
     test('isEmail with custom message', () => {
-      const handleSubmitMock = jest.fn();
-      const wrapper = mount(<FormWithUseControlledFormHook myHandleSubmit={handleSubmitMock} />);
-
       const email = wrapper.find('#email');
       email.simulate('change', { target: { value: 'foomail.com', name: 'email' } });
 
@@ -153,8 +149,58 @@ describe('useControlledForm hook', () => {
       expect(emailErrorMessage.text()).toContain('email is not valid!');
 
       expect(handleSubmitMock).toHaveBeenCalledTimes(0);
+    });
+  });
 
-      wrapper.unmount();
+  describe('handle blur properly', () => {
+    test('with error message', () => {
+      const email = wrapper.find('#email');
+      expect(email).toHaveLength(1);
+
+      email.simulate('blur', { target: { name: 'email', value: 'wrong value' } });
+
+      const emailError = wrapper.find('div[data-test="emailError"]');
+      expect(emailError.text()).toBe('email is not valid!');
+    });
+
+    test('without error message', () => {
+      const email = wrapper.find('#email');
+      expect(email).toHaveLength(1);
+
+      email.simulate('blur', { target: { name: 'email', value: 'john.doe@mail.com' } });
+
+      const emailError = wrapper.find('div[data-test="emailError"]');
+      expect(emailError.text()).toBe('');
+    });
+  });
+
+  describe('clean form properly', () => {
+    test('clear form values and error messages', () => {
+      const email = wrapper.find('#email');
+      expect(email).toHaveLength(1);
+
+      email.simulate('change', { target: { value: 'foo@mail.com', name: 'email' } });
+      expect(wrapper.find('#email').instance().value).toBe('foo@mail.com');
+
+      const phoneNumber = wrapper.find('#phoneNumber');
+      expect(phoneNumber).toHaveLength(1);
+
+      phoneNumber.simulate('change', { target: { value: '1', name: 'phoneNumber' } });
+      expect(wrapper.find('#phoneNumber').instance().value).toBe('1');
+
+      const form = wrapper.find('form');
+      form.simulate('submit');
+
+      expect(wrapper.find('div[data-test="phoneNumberError"]').text()).toBe('This value must contain at least 6 characters');
+
+      const clearFormBtn = wrapper.find('button[data-test="clear-form"]');
+      expect(clearFormBtn).toHaveLength(1);
+
+      clearFormBtn.simulate('click');
+
+      expect(wrapper.find('#email').instance().value).toBe('');
+      expect(wrapper.find('#phoneNumber').instance().value).toBe('');
+      expect(wrapper.find('div[data-test="phoneNumberError"]').text()).toBe('');
     });
   });
 });

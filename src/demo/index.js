@@ -111,11 +111,6 @@ export default () => (
             <td>This function update the error message if exists on blur the respective input</td>
           </tr>
           <tr>
-            <td>handleFocus</td>
-            <td>Function</td>
-            <td>This function remove the error message if exists on focus the respective input</td>
-          </tr>
-          <tr>
             <td>handleSubmit</td>
             <td>Function</td>
             <td>This function first run validations and if the inputs are correct, executes the handleSubmit function passed as prop to the Form with controlled</td>

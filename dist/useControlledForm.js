@@ -1,7 +1,7 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Validators } from '../lib/Validators';
 
 var _stateToErrors = function _stateToErrors(state) {
@@ -40,6 +40,29 @@ export var useControlledForm = function useControlledForm(initialState, formVali
     }
   };
 
+  var handleCheckboxChange = function handleCheckboxChange(e) {
+    var _e$target = e.target,
+        name = _e$target.name,
+        checked = _e$target.checked;
+    setValues(_objectSpread({}, values, _defineProperty({}, name, checked)));
+  };
+
+  var handleBlur = function handleBlur(e) {
+    e.preventDefault();
+    var _e$target2 = e.target,
+        name = _e$target2.name,
+        value = _e$target2.value;
+    var validations = formValidations[name];
+    var result = Validators.validateOne(value, validations);
+    var errorsValue = !result.isValid ? result.errors : [];
+    setErrors(_objectSpread({}, errors, _defineProperty({}, name, errorsValue)));
+  };
+
+  var cleanForm = function cleanForm() {
+    setValues(_objectSpread({}, initialState));
+    setErrors(_stateToErrors(initialState));
+  };
+
   var _validateForm = function _validateForm(valuesToValidate) {
     var result = Validators.validate(valuesToValidate, formValidations);
     setErrors(_objectSpread({}, result.errors));
@@ -50,6 +73,9 @@ export var useControlledForm = function useControlledForm(initialState, formVali
     values: values,
     errors: errors,
     handleChange: handleChange,
-    handleSubmit: handleSubmit
+    handleCheckboxChange: handleCheckboxChange,
+    handleSubmit: handleSubmit,
+    handleBlur: handleBlur,
+    cleanForm: cleanForm
   };
 };

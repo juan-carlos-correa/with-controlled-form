@@ -5,7 +5,6 @@ const Form = ({
   errors,
   handleChange,
   handleBlur,
-  handleFocus,
   handleSubmit
 }) => (
   <form onSubmit={handleSubmit}>
@@ -19,9 +18,9 @@ const Form = ({
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
-        onFocus={handleFocus}
+        data-test="email"
       />
-      <div id="email-error-message" className="error-message">
+      <div id="email-error-message" className="error-message" data-test="emailError">
         {errors.email[0]}
       </div>
     </div>
@@ -35,15 +34,21 @@ const Form = ({
         value={values.phoneNumber}
         onChange={handleChange}
         onBlur={handleBlur}
-        onFocus={handleFocus}
+        data-test="phoneNumber"
       />
-      <div id="phoneNumber-error-message" className="error-message">
+      <div id="phoneNumber-error-message" className="error-message" data-test="phoneNumberError">
         {errors.phoneNumber[0]}
       </div>
     </div>
 
     <div className="text-center">
-      <button className="button" id="send" type="submit">Send</button>
+      <button
+        className="button"
+        id="send"
+        type="submit"
+      >
+        Send
+      </button>
     </div>
   </form>
 );
