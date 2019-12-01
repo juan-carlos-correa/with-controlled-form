@@ -1,12 +1,12 @@
 {
   "name": "with-controlled-form",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "scripts": {
     "start": "react-scripts start",
     "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "publish": "npm build && npm publish"
+    "publish": "npm run build && npm publish"
   },
   "main": "dist/index.js",
   "module": "dist/index.js",
