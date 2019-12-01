@@ -1,7 +1,6 @@
 import _classCallCheck from "@babel/runtime/helpers/esm/classCallCheck";
 import _createClass from "@babel/runtime/helpers/esm/createClass";
-
-var Validators =
+export var Validators =
 /*#__PURE__*/
 function () {
   function Validators() {
@@ -155,5 +154,3 @@ function () {
 
   return Validators;
 }();
-
-export { Validators as default };

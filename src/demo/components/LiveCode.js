@@ -5,7 +5,7 @@ import {
   LiveError,
   LivePreview
 } from 'react-live';
-import WithControlledForm from '../../lib/WithControlledForm'
+import { WithControlledForm } from '../../lib/WithControlledForm'
 
 const FormCode = `// Form.js, this is the UI (representational) component. The props are injected by WithFormControlled
 const Form = ({

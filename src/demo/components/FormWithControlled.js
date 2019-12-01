@@ -1,5 +1,5 @@
 import Form from './Form';
-import WithControlledForm from '../../lib/WithControlledForm';
+import { WithControlledForm } from '../../lib/WithControlledForm';
 
 const formState = {
   email: '',

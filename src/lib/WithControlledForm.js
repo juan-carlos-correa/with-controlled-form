@@ -24,7 +24,7 @@ export const WithControlledForm = (FormComponent, state = {}, formValidations = 
     }
 
     _validateForm = (values) => {
-      const result = Validators.validate(values, formValidations)
+      const result = Validators.validate(values, formValidations);
       this.setState({ errors: result.errors });
       return result.isValid;
     }
@@ -50,15 +50,18 @@ export const WithControlledForm = (FormComponent, state = {}, formValidations = 
     }
 
     handleChange = (e) => {
-      const { name, value, type, checked } = e.target;
+      const { name, value } = e.target;
       const { values } = this.state;
-      let valueToAssign = value;
 
-      if (type === 'checkbox') {
-        valueToAssign = checked;
-      }
+      values[name] = value;
+      this.setState({ values });
+    }
 
-      values[name] = valueToAssign;
+    handleCheckboxChange = (e) => {
+      const { name, checked } = e.target;
+      const { values } = this.state;
+
+      values[name] = checked;
       this.setState({ values });
     }
 
@@ -105,6 +108,7 @@ export const WithControlledForm = (FormComponent, state = {}, formValidations = 
           cleanForm={this.cleanForm}
           isFormClean={this.isFormClean}
           handleChange={this.handleChange}
+          handleCheckboxChange={this.handleCheckboxChange}
           handleBlur={this.handleBlur}
           handleFocus={this.handleFocus}
           handleSubmit={this.handleSubmit}

@@ -4,13 +4,12 @@ import _classCallCheck from "@babel/runtime/helpers/esm/classCallCheck";
 import _createClass from "@babel/runtime/helpers/esm/createClass";
 import _possibleConstructorReturn from "@babel/runtime/helpers/esm/possibleConstructorReturn";
 import _getPrototypeOf from "@babel/runtime/helpers/esm/getPrototypeOf";
-import _inherits from "@babel/runtime/helpers/esm/inherits";
 import _assertThisInitialized from "@babel/runtime/helpers/esm/assertThisInitialized";
+import _inherits from "@babel/runtime/helpers/esm/inherits";
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React, { Component } from 'react';
-import Validators from './Validators';
-
-var WithControlledForm = function WithControlledForm(FormComponent) {
+import { Validators } from './Validators';
+export var WithControlledForm = function WithControlledForm(FormComponent) {
   var _temp;
 
   var state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -27,7 +26,7 @@ var WithControlledForm = function WithControlledForm(FormComponent) {
 
       _this = _possibleConstructorReturn(this, _getPrototypeOf(WithFormMethodsHOC).call(this, props));
 
-      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_stateToErrors", function (state) {
+      _defineProperty(_assertThisInitialized(_this), "_stateToErrors", function (state) {
         var errors = {};
         var keys = Object.keys(state);
 
@@ -38,7 +37,7 @@ var WithControlledForm = function WithControlledForm(FormComponent) {
         return errors;
       });
 
-      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_validateForm", function (values) {
+      _defineProperty(_assertThisInitialized(_this), "_validateForm", function (values) {
         var result = Validators.validate(values, formValidations);
 
         _this.setState({
@@ -48,7 +47,7 @@ var WithControlledForm = function WithControlledForm(FormComponent) {
         return result.isValid;
       });
 
-      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "isFormClean", function () {
+      _defineProperty(_assertThisInitialized(_this), "isFormClean", function () {
         var values = _this.state.values;
         var isValue = Object.values(values).filter(function (val) {
           return val.length > 0;
@@ -56,7 +55,7 @@ var WithControlledForm = function WithControlledForm(FormComponent) {
         return isValue.length === 0;
       });
 
-      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "cleanForm", function () {
+      _defineProperty(_assertThisInitialized(_this), "cleanForm", function () {
         var newValues = {};
         var values = _this.state.values;
 
@@ -70,32 +69,36 @@ var WithControlledForm = function WithControlledForm(FormComponent) {
         });
       });
 
-      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleChange", function (e) {
+      _defineProperty(_assertThisInitialized(_this), "handleChange", function (e) {
         var _e$target = e.target,
             name = _e$target.name,
-            value = _e$target.value,
-            type = _e$target.type,
-            checked = _e$target.checked;
+            value = _e$target.value;
         var values = _this.state.values;
-        var valueToAssign = value;
-
-        if (type === 'checkbox') {
-          valueToAssign = checked;
-        }
-
-        values[name] = valueToAssign;
+        values[name] = value;
 
         _this.setState({
           values: values
         });
       });
 
-      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleBlur", function (e) {
-        e.preventDefault();
-        var errors = _this.state.errors;
+      _defineProperty(_assertThisInitialized(_this), "handleCheckboxChange", function (e) {
         var _e$target2 = e.target,
             name = _e$target2.name,
-            value = _e$target2.value;
+            checked = _e$target2.checked;
+        var values = _this.state.values;
+        values[name] = checked;
+
+        _this.setState({
+          values: values
+        });
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "handleBlur", function (e) {
+        e.preventDefault();
+        var errors = _this.state.errors;
+        var _e$target3 = e.target,
+            name = _e$target3.name,
+            value = _e$target3.value;
         var validations = formValidations[name];
         var result = Validators.validateOne(value, validations);
         errors[name] = !result.isValid ? result.errors[0] : [];
@@ -105,7 +108,7 @@ var WithControlledForm = function WithControlledForm(FormComponent) {
         });
       });
 
-      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleFocus", function (e) {
+      _defineProperty(_assertThisInitialized(_this), "handleFocus", function (e) {
         var name = e.target.name;
         var errors = _this.state.errors;
 
@@ -116,7 +119,7 @@ var WithControlledForm = function WithControlledForm(FormComponent) {
         }
       });
 
-      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleSubmit", function (e) {
+      _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (e) {
         e.preventDefault();
         var values = _this.state.values;
         var handleSubmit = _this.props.handleSubmit;
@@ -140,6 +143,7 @@ var WithControlledForm = function WithControlledForm(FormComponent) {
           cleanForm: this.cleanForm,
           isFormClean: this.isFormClean,
           handleChange: this.handleChange,
+          handleCheckboxChange: this.handleCheckboxChange,
           handleBlur: this.handleBlur,
           handleFocus: this.handleFocus,
           handleSubmit: this.handleSubmit
@@ -150,5 +154,3 @@ var WithControlledForm = function WithControlledForm(FormComponent) {
     return WithFormMethodsHOC;
   }(Component), _temp;
 };
-
-export default WithControlledForm;

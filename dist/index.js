@@ -1,2 +1,3 @@
-import WithControlledForm from './WithControlledForm';
-export default WithControlledForm;
+import { useControlledForm } from './useControlledForm';
+import { WithControlledForm } from './WithControlledForm';
+export { useControlledForm, WithControlledForm };

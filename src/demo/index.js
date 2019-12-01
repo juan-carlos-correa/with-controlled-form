@@ -1,5 +1,4 @@
 import React from 'react';
-import FormWithControlled from './components/FormWithControlled';
 import LiveCode from './components/LiveCode';
 import SampleMakeWCFCode from './components/SampleMakeWCFCode';
 import './index.css';
@@ -9,7 +8,8 @@ export default () => (
     <section className="center">
       <h1>With Controlled Form</h1>
       <p>
-        Transform your UI (representational) form components to a React controlled form component easly 🤓
+        Transform your UI (representational) form components to a React controlled form component easly
+        <span role="img" aria-label="nerd">🤓</span>
       </p>
 
       <p>

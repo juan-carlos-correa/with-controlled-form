@@ -12,6 +12,7 @@ exports[`WithControlledForm render 1`] = `
     }
     handleBlur={[Function]}
     handleChange={[Function]}
+    handleCheckboxChange={[Function]}
     handleFocus={[Function]}
     handleSubmit={[Function]}
     isFormClean={[Function]}
