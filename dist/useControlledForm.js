@@ -2,7 +2,7 @@ import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import { useState } from 'react';
-import { Validators } from '../lib/Validators';
+import { Validators } from './Validators';
 
 var _stateToErrors = function _stateToErrors(state) {
   var errors = {};

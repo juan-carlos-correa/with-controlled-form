@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Validators } from '../lib/Validators'
+import { Validators } from './Validators'
 
 const _stateToErrors = (state) => {
   const errors = {};
