@@ -35,9 +35,13 @@ export var useControlledForm = function useControlledForm(initialState, formVali
   };
 
   var handleSubmit = function handleSubmit(_handleSubmit) {
-    if (_validateForm(values)) {
-      _handleSubmit(values);
-    }
+    return function (event) {
+      event.preventDefault();
+
+      if (_validateForm(values)) {
+        _handleSubmit(values);
+      }
+    };
   };
 
   var handleCheckboxChange = function handleCheckboxChange(e) {
