@@ -38,7 +38,7 @@ const FormWithUseControlledFormHook = ({ myHandleSubmit }) => {
         values={values}
         errors={errors}
         handleChange={handleChange}
-        handleSubmit={() => handleSubmit(myHandleSubmit)}
+        handleSubmit={handleSubmit(myHandleSubmit)}
         handleBlur={handleBlur}
       />
       <button data-test="clear-form" onClick={() => cleanForm()}>Clear form</button>

@@ -23,7 +23,9 @@ export const useControlledForm = (initialState, formValidations) => {
     setValues({ ...values, [name]: value });
   }
 
-  const handleSubmit = (_handleSubmit) => {
+  const handleSubmit = (_handleSubmit) => (event) => {
+    event.preventDefault();
+
     if (_validateForm(values)) {
       _handleSubmit(values);
     }

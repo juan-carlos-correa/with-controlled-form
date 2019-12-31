@@ -23,7 +23,7 @@ const Form = ({
   } = useControlledForm(formValues, formValidations);
 
   return (
-    <form onSubmit={() => handleSubmit(myHandleSubmit)}>
+    <form onSubmit={handleSubmit(myHandleSubmit)}>
       <label htmlFor="checkbox">Check value:</label>
       <input
         checked={values.checkbox}
