@@ -1,6 +1,6 @@
 {
   "name": "with-controlled-form",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "scripts": {
     "start": "react-scripts start",
     "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
