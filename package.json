@@ -1,6 +1,7 @@
 {
   "name": "with-controlled-form",
-  "version": "1.1.4",
+  "version": "1.1.5",
+  "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
     "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
@@ -48,6 +49,7 @@
     "@babel/cli": "^7.2.3",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
+    "@babel/plugin-transform-modules-commonjs": "7.7.5",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "babel-core": "^7.0.0-bridge.0",
     "enzyme": "^3.9.0",

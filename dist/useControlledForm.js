@@ -1,8 +1,21 @@
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
-import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
-import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import { useState } from 'react';
-import { Validators } from './Validators';
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.useControlledForm = void 0;
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/defineProperty"));
+
+var _objectSpread5 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectSpread"));
+
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/slicedToArray"));
+
+var _react = require("react");
+
+var _Validators = require("./Validators");
 
 var _stateToErrors = function _stateToErrors(state) {
   var errors = {};
@@ -16,14 +29,14 @@ var _stateToErrors = function _stateToErrors(state) {
   return errors;
 };
 
-export var useControlledForm = function useControlledForm(initialState, formValidations) {
-  var _useState = useState(_objectSpread({}, initialState)),
-      _useState2 = _slicedToArray(_useState, 2),
+var useControlledForm = function useControlledForm(initialState, formValidations) {
+  var _useState = (0, _react.useState)((0, _objectSpread5.default)({}, initialState)),
+      _useState2 = (0, _slicedToArray2.default)(_useState, 2),
       values = _useState2[0],
       setValues = _useState2[1];
 
-  var _useState3 = useState(_stateToErrors(initialState)),
-      _useState4 = _slicedToArray(_useState3, 2),
+  var _useState3 = (0, _react.useState)(_stateToErrors(initialState)),
+      _useState4 = (0, _slicedToArray2.default)(_useState3, 2),
       errors = _useState4[0],
       setErrors = _useState4[1];
 
@@ -31,7 +44,7 @@ export var useControlledForm = function useControlledForm(initialState, formVali
     var target = _ref.target;
     var name = target.name,
         value = target.value;
-    setValues(_objectSpread({}, values, _defineProperty({}, name, value)));
+    setValues((0, _objectSpread5.default)({}, values, (0, _defineProperty2.default)({}, name, value)));
   };
 
   var handleSubmit = function handleSubmit(_handleSubmit) {
@@ -48,7 +61,7 @@ export var useControlledForm = function useControlledForm(initialState, formVali
     var _e$target = e.target,
         name = _e$target.name,
         checked = _e$target.checked;
-    setValues(_objectSpread({}, values, _defineProperty({}, name, checked)));
+    setValues((0, _objectSpread5.default)({}, values, (0, _defineProperty2.default)({}, name, checked)));
   };
 
   var handleBlur = function handleBlur(e) {
@@ -57,19 +70,22 @@ export var useControlledForm = function useControlledForm(initialState, formVali
         name = _e$target2.name,
         value = _e$target2.value;
     var validations = formValidations[name];
-    var result = Validators.validateOne(value, validations);
+
+    var result = _Validators.Validators.validateOne(value, validations);
+
     var errorsValue = !result.isValid ? result.errors : [];
-    setErrors(_objectSpread({}, errors, _defineProperty({}, name, errorsValue)));
+    setErrors((0, _objectSpread5.default)({}, errors, (0, _defineProperty2.default)({}, name, errorsValue)));
   };
 
   var cleanForm = function cleanForm() {
-    setValues(_objectSpread({}, initialState));
+    setValues((0, _objectSpread5.default)({}, initialState));
     setErrors(_stateToErrors(initialState));
   };
 
   var _validateForm = function _validateForm(valuesToValidate) {
-    var result = Validators.validate(valuesToValidate, formValidations);
-    setErrors(_objectSpread({}, result.errors));
+    var result = _Validators.Validators.validate(valuesToValidate, formValidations);
+
+    setErrors((0, _objectSpread5.default)({}, result.errors));
     return result.isValid;
   };
 
@@ -83,3 +99,5 @@ export var useControlledForm = function useControlledForm(initialState, formVali
     cleanForm: cleanForm
   };
 };
+
+exports.useControlledForm = useControlledForm;

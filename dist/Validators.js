@@ -1,18 +1,27 @@
-import _classCallCheck from "@babel/runtime/helpers/esm/classCallCheck";
-import _createClass from "@babel/runtime/helpers/esm/createClass";
-export var Validators =
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Validators = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/createClass"));
+
+var Validators =
 /*#__PURE__*/
 function () {
   function Validators() {
     var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-
-    _classCallCheck(this, Validators);
-
+    (0, _classCallCheck2.default)(this, Validators);
     this.value = value;
     this.errors = [];
   }
 
-  _createClass(Validators, [{
+  (0, _createClass2.default)(Validators, [{
     key: "isRequired",
     value: function isRequired(verify) {
       var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'This value is required';
@@ -150,6 +159,7 @@ function () {
       return result;
     }
   }]);
-
   return Validators;
 }();
+
+exports.Validators = Validators;
