@@ -1,6 +1,6 @@
 {
   "name": "with-controlled-form",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
@@ -48,9 +48,11 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-proposal-export-default-from": "7.7.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
     "@babel/plugin-transform-modules-commonjs": "7.7.5",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/preset-env": "7.7.7",
     "babel-core": "^7.0.0-bridge.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",
@@ -59,5 +61,8 @@
     "react-dom": "^16.8.3",
     "react-live": "^1.12.0",
     "react-scripts": "3.3.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "7.8.4"
   }
 }
